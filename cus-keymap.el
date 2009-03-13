@@ -5,7 +5,7 @@
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Created: 20080830
 ;; Updated: 20090313
-;; Version: 0.0.2
+;; Version: 0.0.3
 ;; Homepage: http://github.com/tarsius/cus-keymap
 ;; Keywords: extensions
 
@@ -106,7 +106,7 @@ also be recorded as the standard value, which almost certainly is wrong."
   (unless (get symbol 'custom-type)
     (put symbol 'custom-type 'keymap)
     (put symbol 'custom-set 'kmu-set-mapvar)
-    (put symbol 'standard-value (list (quote (symbol-value symbol)))))
+    (put symbol 'standard-value (list (symbol-value symbol))))
   (when requests
     (let ((current (get symbol 'custom-requests)))
       (dolist (request requests)
@@ -143,7 +143,7 @@ Also see `defcustom'."
   (setq args (plist-put args :set  '(quote kmu-set-mapvar)))
   (nconc (list 'custom-declare-variable
 	       (list 'quote symbol)
-	       (list 'quote (or value (quote (make-sparse-keymap))))
+	       (list 'quote (or value (make-sparse-keymap)))
 	       doc)
 	 args))
 
