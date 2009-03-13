@@ -95,8 +95,10 @@ Otherwise when a customized keymap variable is no longer defined by
 the time Custom sets the customized variables, the saved value would
 also be recorded as the standard value, which almost certainly is wrong."
   (interactive "SFeature: \nSSymbol: ")
-  (unless (interactive-p)
-    (error "Only for interactive use"))
+  ;; TODO Does this make sense?  It might actually be better to advertise
+  ;; this function to be wrapped in `eval-after-load'.
+  ;; (unless (interactive-p)
+  ;;   (error "Only for interactive use"))
   (require feature)
   (custom-make-mapvar-customizable-internal symbol (list feature)))
 
