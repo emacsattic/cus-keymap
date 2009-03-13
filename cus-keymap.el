@@ -1,12 +1,12 @@
 ;;; cus-keymap.el --- customize keymaps
 
-;; Copyright (C) 2008 Jonas Bernoulli
+;; Copyright (C) 2008, 2009  Jonas Bernoulli
 
-;; Author: Jonas Bernoulli <jonas@bernoulli.cc>
+;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Created: 20080830
-;; Updated: 20080904
+;; Updated: 20090313
 ;; Version: 0.0.2
-;; Homepage: http://artavatar.net
+;; Homepage: http://github.com/tarsius/cus-keymap
 ;; Keywords: extensions
 
 ;; This file is not part of GNU Emacs.
@@ -37,17 +37,21 @@
 ;; customizable that are not yet customizable and whose symbol-value
 ;; are keymaps.  It should be called only once: in your init file, just
 ;; before the call to `custom-set-variables', respectively before
-;; loading `custom-file'.
+;; loading `custom-file'.  Or if you are using the `split-custom-file'
+;; patch after the call to `custom-set-all'.
 
-;; Most keymaps are undefined until some feature first requested in
+;; Most keymaps are undefined until some feature is first requested in
 ;; the current session.  In order to make those keymaps customizable,
-;; use command `custom-make-mapvar-customizable'.
+;; use command `custom-make-mapvar-customizable', once the feature has
+;; been loaded.
 
 ;;; Code:
 
 (require 'custom)
 (require 'wid-keymap)
 (require 'keymap-utils)
+
+;;; Making existing keymap variables customizable.
 
 (defun custom-make-mapvars-customizable ()
   "Make all variables customizable whose symbol-value are keymaps.
@@ -57,6 +61,9 @@ Variables that are already customizable are not affected.
 This function should be called only once: in your init file, just
 before the call to `custom-set-variables', respectively before
 loading `custom-file'.
+
+Or if you are using the `split-custom-file' patch after the call
+to `custom-set-all'.
 
 To make a keymap variable customizable that was not defined
 when this function was called use the interactive command
@@ -148,7 +155,7 @@ Neither MAPVAR, COMMAND nor VALUE need to be quoted.  If MAPVAR is not
 already bound, initialize it to VALUE, which has to be a keymap or nil.
 If MAPVAR is nil store the keymap in COMMAND's `symbol-value'.
 
-Also see `defprefixcmd' and `defkeymap'."
+Also see `define-prefix-command', `defkeymap' and `defcustom'."
   `(progn (defkeymap ,(or mapvar command) ,value ,doc ,@args)
 	  (fset ',command ,(or mapvar command))))
 
