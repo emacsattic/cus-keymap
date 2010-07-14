@@ -5,7 +5,7 @@
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Created: 20080830
 ;; Updated: 20090313
-;; Version: 0.0.3
+;; Version: 0.0.3a
 ;; Homepage: http://github.com/tarsius/cus-keymap
 ;; Keywords: extensions
 
@@ -44,6 +44,16 @@
 ;; the current session.  In order to make those keymaps customizable,
 ;; use command `custom-make-mapvar-customizable', once the feature has
 ;; been loaded.
+
+;; **************************** WARNING ****************************
+;; *                                                               *
+;; *  This package is somewhat usable but it is not finished and   *
+;; *  since I no longer use it this will probably never change.    *
+;; *                                                               *
+;; *  If you are interested feel free to adopt it - orphans lead   *
+;; *  a sad live.                                                  *
+;; *                                                               *
+;; *****************************************************************
 
 ;;; Code:
 
